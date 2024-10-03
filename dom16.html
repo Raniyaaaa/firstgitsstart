@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body style="margin: 0">
+  <form onsubmit="handleFormSubmit(event)">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" />
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" />
+    <label for="phone">Phone No</label>
+    <input type="tel" name="phone" id="phone" />
+    <button type="submit">Submit</button>
+  </form>
+  <ul></ul>
+</body>
+<script>
+    
+// Write your code below:
+
+// function handleFormSubmit(event){
+//   event.preventDefault()
+//   const listofuserss=document.querySelector('ul')
+//   const username=event.target.username.value
+//   const email=event.target.email.value
+//   const phone=event.target.phone.value
+
+//   const details={
+//     username,
+//     email,
+//     phone
+//   }
+
+//   localStorage.setItem(email, JSON.stringify(details));
+
+//   const list=document.createElement('li')
+//   list.setAttribute("id",email)
+//   const listtext=document.createTextNode(`Name: ${username}, Email: ${email}, Phone Number: ${phone} `)
+//   list.appendChild(listtext)
+
+//   const deletebtn=document.createElement('button')
+//   const deletetext=document.createTextNode("Delete")
+//   deletebtn.appendChild(deletetext)
+//   deletebtn.className='delete_btn'
+//   list.appendChild(deletebtn)
+
+//   const editbtn=document.createElement('button')
+//   const edittext=document.createTextNode("Edit")
+//   editbtn.appendChild(edittext)
+//   editbtn.className='edit_btn'
+//   list.appendChild(editbtn)
+
+//   listofuserss.appendChild(list)
+
+//   listofuserss.addEventListener('click',function(e){
+//     if(e.target.classList.contains('delete_btn')){
+//       const usertodelete=e.target.parentElement
+//       const emailToDelete = usertodelete.getAttribute("id");
+      
+//       listofuserss.removeChild(usertodelete)
+//       localStorage.removeItem(emailToDelete)
+  
+//     }
+//     if(e.target.classList.contains('edit_btn')){
+//       const usertoedit=e.target.parentElement
+//       const emailToEdit = usertoedit.getAttribute("id");
+      
+//       const userdetails=localStorage.getItem(emailToEdit)
+
+      
+
+//       document.getElementById('username').value=localStorage.getItem(emailToEdit).username;
+//       document.getElementById('email').value=localStorage.getItem(emailToEdit).email;
+//       document.getElementById('phone').value=localStorage.getItem(emailToEdit).phone;
+//       listofuserss.removeChild(usertoedit)
+//       localStorage.removeItem(emailToEdit)
+
+//     }
+//   })
+//   event.target.reset();
+// }
+// module.exports=handleFormSubmit
+
+
+function handleFormSubmit(event){
+  event.preventDefault()
+  const listofuserss=document.querySelector('ul')
+  const username=event.target.username.value
+  const email=event.target.email.value
+  const phone=event.target.phone.value
+
+  const details={
+    username,
+    email,
+    phone
+  }
+
+  localStorage.setItem(email, JSON.stringify(details));
+
+  const list=document.createElement('li')
+  list.setAttribute("id",email)
+  const listtext=document.createTextNode(`Name: ${username}, Email: ${email}, Phone Number: ${phone} `)
+  list.appendChild(listtext)
+
+  const deletebtn=document.createElement('button')
+  const deletetext=document.createTextNode("Delete")
+  deletebtn.appendChild(deletetext)
+  deletebtn.className='delete_btn'
+  list.appendChild(deletebtn)
+
+  const editbtn=document.createElement('button')
+  const edittext=document.createTextNode("Edit")
+  editbtn.appendChild(edittext)
+  editbtn.className='edit_btn'
+  list.appendChild(editbtn)
+
+  listofuserss.appendChild(list)
+
+  event.target.reset();
+}
+const listofuserss=document.querySelector('ul')
+  listofuserss.addEventListener('click',function(e){
+    if(e.target.classList.contains('delete_btn')){
+      const usertodelete=e.target.parentElement
+      const emailToDelete = usertodelete.getAttribute("id");
+      
+      listofuserss.removeChild(usertodelete)
+      localStorage.removeItem(emailToDelete)
+  
+    }
+    if(e.target.classList.contains('edit_btn')){
+      const usertoedit=e.target.parentElement
+      const emailToEdit = usertoedit.getAttribute("id");
+      
+      const userdetails=JSON.parse(localStorage.getItem(JSON.stringify(emailToEdit)))
+
+      // console.log(JSON.parse(localStorage.getItem(emailToEdit)).username)
+      // console.log(JSON.parse(localStorage.getItem(emailToEdit)).email)
+      // console.log(JSON.parse(localStorage.getItem(emailToEdit)).phone)
+
+      document.getElementById('username').value=JSON.parse(localStorage.getItem(emailToEdit)).username;
+      document.getElementById('email').value=JSON.parse(localStorage.getItem(emailToEdit)).email;
+      document.getElementById('phone').value=JSON.parse(localStorage.getItem(emailToEdit)).phone;
+
+      listofuserss.removeChild(usertoedit)
+      localStorage.removeItem(emailToEdit)
+
+    }
+  })
+
+module.exports=handleFormSubmit
+
+</script>
+
+</html>
